@@ -42,3 +42,14 @@ Keep keys in environment variables, never in the code.
 
 ## License
 MIT – see [LICENSE](LICENSE).
+
+## Security
+
+This app was reviewed in [CodeAlpha_SecureCodingReview](https://github.com/x3r01432/CodeAlpha_SecureCodingReview), and these fixes are applied:
+
+- Errors show a short generic message. Technical details go to the server log only.
+- Every outside call has a time limit: Google Translate (20 s), MyMemory (5 s to connect, 15 s to read), and text-to-speech.
+- Translations are shown as plain text, so Markdown or links from a translation service aren't rendered.
+- Translate has a 3-second cooldown and Listen a 5-second cooldown per browser session.
+- Input is limited to 2,000 characters. Long text sent to MyMemory is split into pieces of 450 characters or less to stay within its limit.
+- Dependencies are pinned to exact tested versions in `requirements.txt`. deep-translator stays at 1.11.4 (see advisory PYSEC-2022-252 in the review).
